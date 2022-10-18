@@ -21,6 +21,11 @@ VueTouch.config.swipe = {
   threshold: 5
 }
 
+VueTouch.registerCustomEvent('doubletap', {
+  type: 'tap',
+  taps: 2
+})
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

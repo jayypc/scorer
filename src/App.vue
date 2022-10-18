@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <v-touch v-on:swipeleft="pointClick(1)">
+    <v-touch v-on:swipeleft="pointClick(-1)" v-on:swiperight="pointClick(1)" v-on:swipeup="pointClick(2)" v-on:swipedown="pointClick(-2)" v-on:doubletap="pointClick(0)">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6 buleb" :style="{ height: screenHeight + 'px' }">
+          <div class="col-6 buleb" :style="{ height: screenHeight + 'px' }">
             <div style="height:10%">
               <auto-size-span object-fit="contain" class="autosize" text="蓝队"></auto-size-span>
             </div>
@@ -11,7 +11,7 @@
               <auto-size-span object-fit="contain" class="autosize" :text="bluePoint"></auto-size-span>
             </div>
           </div>
-          <div class="col-md-6 redb" :style="{ height: screenHeight + 'px' }">
+          <div class="col-6 redb" :style="{ height: screenHeight + 'px' }">
             <div style="height:10%">
               <auto-size-span object-fit="contain" class="autosize" text="红队"></auto-size-span>
             </div>
