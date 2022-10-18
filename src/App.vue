@@ -1,28 +1,30 @@
 <template>
-  <div id="app" v-on:swipeleft="pointClick(1)">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6 buleb" :style="{ height: screenHeight + 'px' }">
-          <div style="height:10%">
-            <auto-size-span object-fit="contain" class="autosize" text="蓝队"></auto-size-span>
+  <div id="app">
+    <v-touch v-on:swipeleft="pointClick(1)">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 buleb" :style="{ height: screenHeight + 'px' }">
+            <div style="height:10%">
+              <auto-size-span object-fit="contain" class="autosize" text="蓝队"></auto-size-span>
+            </div>
+            <div style="height:90%" @click="pointClick(1)">
+              <auto-size-span object-fit="contain" class="autosize" :text="bluePoint"></auto-size-span>
+            </div>
           </div>
-          <div style="height:90%" @click="pointClick(1)">
-            <auto-size-span object-fit="contain" class="autosize" :text="bluePoint"></auto-size-span>
-          </div>
-        </div>
-        <div class="col-md-6 redb" :style="{ height: screenHeight + 'px' }">
-          <div style="height:10%">
-            <auto-size-span object-fit="contain" class="autosize" text="红队"></auto-size-span>
-          </div>
-          <div style="height:90%" @click="pointClick(2)">
-            <auto-size-span object-fit="contain" class="autosize" :text="redPoint"></auto-size-span>
+          <div class="col-md-6 redb" :style="{ height: screenHeight + 'px' }">
+            <div style="height:10%">
+              <auto-size-span object-fit="contain" class="autosize" text="红队"></auto-size-span>
+            </div>
+            <div style="height:90%" @click="pointClick(2)">
+              <auto-size-span object-fit="contain" class="autosize" :text="redPoint"></auto-size-span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="mainIcon" @click="pointClick(0)">
-      <b-icon icon="arrow-counterclockwise" style="color:white" font-scale="4"></b-icon>
-    </div>
+      <div class="mainIcon" @click="pointClick(0)">
+        <b-icon icon="arrow-counterclockwise" style="color:white" font-scale="4"></b-icon>
+      </div>
+    </v-touch>
   </div>
 </template>
 

@@ -18,7 +18,7 @@ Vue.use(IconsPlugin)
 Vue.use(VueTouch, {name: 'v-touch'})
 // 设置左右滑动的距离
 VueTouch.config.swipe = {
-  threshold: 50
+  threshold: 5
 }
 
 Vue.config.productionTip = false
