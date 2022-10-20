@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-touch v-on:swipeleft="pointClick(-1)" v-on:swiperight="pointClick(1)" v-on:swipeup="pointClick(2)" v-on:swipedown="pointClick(-2)" v-on:doubletap="pointClick(0)">
+    <v-touch v-on:swipeleft="pointClick(1)" v-on:swiperight="pointClick(-1)" v-on:swipeup="pointClick(-2)" v-on:swipedown="pointClick(2)" v-on:doubletap="pointClick(0)">
       <div class="container-fluid">
         <div class="row">
           <div class="col-6 buleb" :style="{ height: screenHeight + 'px' }">
