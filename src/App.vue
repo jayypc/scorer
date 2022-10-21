@@ -1,22 +1,27 @@
 <template>
   <div id="app">
-    <v-touch v-on:swipeleft="pointClick(1)" v-on:swiperight="pointClick(-1)" v-on:swipeup="pointClick(-2)" v-on:swipedown="pointClick(2)" v-on:doubletap="pointClick(0)">
+    <v-touch v-on:swipeleft="pointClick(1)" v-on:swiperight="pointClick(-1)" v-on:swipeup="pointClick(-2)" v-on:swipedown="pointClick(2)" v-on:pressup="pointClick(0)">
       <div class="container-fluid">
         <div class="row">
           <div class="col-6 buleb" :style="{ height: screenHeight + 'px' }">
             <div style="height:10%">
               <auto-size-span object-fit="contain" class="autosize" text="蓝队"></auto-size-span>
             </div>
-            <div style="height:90%" @click="pointClick(1)">
-              <auto-size-span object-fit="contain" class="autosize" :text="bluePoint"></auto-size-span>
+            <div style="height:90%">
+                <auto-size-span v-if="blueVisible" object-fit="contain" class="autosize animate__animated animate__flash" :text="bluePoint"></auto-size-span>
             </div>
           </div>
           <div class="col-6 redb" :style="{ height: screenHeight + 'px' }">
             <div style="height:10%">
               <auto-size-span object-fit="contain" class="autosize" text="红队"></auto-size-span>
             </div>
-            <div style="height:90%" @click="pointClick(2)">
-              <auto-size-span object-fit="contain" class="autosize" :text="redPoint"></auto-size-span>
+            <div style="height:90%">
+              <transition
+              enter-active-class="animate__animated animate__fadeInUp"
+              leave-active-class="animate__animated animate__fadeOutUp"
+              >
+                <auto-size-span v-if="redVisible" object-fit="contain" class="autosize" :text="redPoint"></auto-size-span>
+              </transition>
             </div>
           </div>
         </div>
@@ -25,6 +30,8 @@
         <b-icon icon="arrow-counterclockwise" style="color:white" font-scale="4"></b-icon>
       </div>
     </v-touch>
+    <audio controls="controls" hidden src="../../../static/add.mp3" ref="audioAdd"></audio>
+    <audio controls="controls" hidden src="../../../static/minus.mp3" ref="audioMinus"></audio>
   </div>
 </template>
 
@@ -41,7 +48,9 @@ export default {
       screenWeight: 0,
       screenHeight: 0,
       bluePoint: 0,
-      redPoint: 0
+      redPoint: 0,
+      blueVisible: true,
+      redVisible: true
     }
   },
   mounted () {
@@ -55,17 +64,47 @@ export default {
   },
   methods: {
     pointClick (type) {
+      this.playMusic(type)
       if (type === 0) {
         this.bluePoint = 0
         this.redPoint = 0
       } else if (type === 1) {
+        this.blueVisible = false
+        setTimeout(() => {
+          this.blueVisible = true
+        }, 200)
         this.bluePoint = this.bluePoint + 1
       } else if (type === 2) {
+        this.redVisible = false
+        setTimeout(() => {
+          this.redVisible = true
+        }, 200)
         this.redPoint = this.redPoint + 1
       } else if (type === -1) {
-        this.bluePoint = this.bluePoint - 1
+        if (this.bluePoint > 0) {
+          this.blueVisible = false
+          setTimeout(() => {
+            this.blueVisible = true
+          }, 200)
+          this.bluePoint = this.bluePoint - 1
+        }
       } else if (type === -2) {
-        this.redPoint = this.redPoint - 1
+        if (this.redPoint > 0) {
+          this.redVisible = false
+          setTimeout(() => {
+            this.redVisible = true
+          }, 200)
+          this.redPoint = this.redPoint - 1
+        }
+      }
+    },
+    playMusic (type) {
+      if (type > 0) {
+        this.$refs.audioAdd.currentTime = 0
+        this.$refs.audioAdd.play()
+      } else if (type < 0) {
+        this.$refs.audioMinus.currentTime = 0
+        this.$refs.audioMinus.play()
       }
     }
   }

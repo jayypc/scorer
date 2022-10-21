@@ -10,6 +10,8 @@ import VueTouch from 'vue-touch'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import animate from 'animate.css'
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
@@ -20,6 +22,8 @@ Vue.use(VueTouch, {name: 'v-touch'})
 VueTouch.config.swipe = {
   threshold: 5
 }
+
+Vue.use(animate)
 
 VueTouch.registerCustomEvent('doubletap', {
   type: 'tap',
