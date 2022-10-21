@@ -8,7 +8,12 @@
               <auto-size-span object-fit="contain" class="autosize" text="蓝队"></auto-size-span>
             </div>
             <div style="height:90%">
-                <auto-size-span v-if="blueVisible" object-fit="contain" class="autosize animate__animated animate__flash" :text="bluePoint"></auto-size-span>
+              <transition
+                enter-active-class="animate__animated animate__fadeInUp"
+                leave-active-class="animate__animated animate__fadeOutUp"
+              >
+                <auto-size-span v-if="blueVisible" object-fit="contain" class="autosize" :text="bluePoint"></auto-size-span>
+              </transition>
             </div>
           </div>
           <div class="col-6 redb" :style="{ height: screenHeight + 'px' }">
@@ -17,8 +22,8 @@
             </div>
             <div style="height:90%">
               <transition
-              enter-active-class="animate__animated animate__fadeInUp"
-              leave-active-class="animate__animated animate__fadeOutUp"
+                enter-active-class="animate__animated animate__fadeInUp"
+                leave-active-class="animate__animated animate__fadeOutUp"
               >
                 <auto-size-span v-if="redVisible" object-fit="contain" class="autosize" :text="redPoint"></auto-size-span>
               </transition>
@@ -30,8 +35,8 @@
         <b-icon icon="arrow-counterclockwise" style="color:white" font-scale="4"></b-icon>
       </div>
     </v-touch>
-    <audio controls="controls" hidden src="../../../static/add.mp3" ref="audioAdd"></audio>
-    <audio controls="controls" hidden src="../../../static/minus.mp3" ref="audioMinus"></audio>
+    <audio controls="controls" hidden src="../static/add.mp3" ref="audioAdd"></audio>
+    <audio controls="controls" hidden src="../static/minus.mp3" ref="audioMinus"></audio>
   </div>
 </template>
 
@@ -66,6 +71,12 @@ export default {
     pointClick (type) {
       this.playMusic(type)
       if (type === 0) {
+        this.blueVisible = false
+        this.redVisible = false
+        setTimeout(() => {
+          this.blueVisible = true
+          this.redVisible = true
+        }, 200)
         this.bluePoint = 0
         this.redPoint = 0
       } else if (type === 1) {
